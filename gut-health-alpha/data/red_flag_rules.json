@@ -1,0 +1,17 @@
+{
+  "immediate_attention": [
+    "blood in stool",
+    "black tarry stool",
+    "severe abdominal pain",
+    "unexplained weight loss",
+    "difficulty swallowing",
+    "persistent vomiting",
+    "fever with abdominal pain"
+  ],
+  "cautionary": [
+    "family history of colon cancer",
+    "symptoms persist > 2 weeks",
+    "nocturnal diarrhea",
+    "over 50 years old new onset"
+  ]
+}

@@ -1,0 +1,465 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  /* Complete cohesive color system for healthcare AI app */
+
+  /* PRIMARY - Deep Black/Gray (Monochrome Authority) */
+  --primary-50: oklch(0.98 0 0);
+  --primary-100: oklch(0.95 0 0);
+  --primary-200: oklch(0.85 0 0);
+  --primary-300: oklch(0.70 0 0);
+  --primary-400: oklch(0.50 0 0);
+  --primary-500: oklch(0.20 0 0); /* Main brand color: Black-ish */
+  --primary-600: oklch(0.15 0 0);
+  --primary-700: oklch(0.10 0 0);
+  --primary-800: oklch(0.05 0 0);
+  --primary-900: oklch(0.00 0 0); /* Pure Black */
+
+  /* SECONDARY - Neutral Gray (Architecture) */
+  --secondary-50: oklch(0.99 0 0);
+  --secondary-100: oklch(0.95 0 0);
+  --secondary-200: oklch(0.90 0 0);
+  --secondary-300: oklch(0.80 0 0);
+  --secondary-400: oklch(0.70 0 0);
+  --secondary-500: oklch(0.60 0 0);
+  --secondary-600: oklch(0.50 0 0);
+  --secondary-700: oklch(0.40 0 0);
+  --secondary-800: oklch(0.30 0 0);
+  --secondary-900: oklch(0.20 0 0);
+
+  /* NEUTRALS - Warm, soft neutrals (not stark) */
+  --neutral-white: oklch(0.99 0.002 220);
+  --neutral-50: oklch(0.98 0.005 220);
+  --neutral-100: oklch(0.96 0.008 220);
+  --neutral-200: oklch(0.92 0.01 220);
+  --neutral-300: oklch(0.88 0.012 220);
+  --neutral-400: oklch(0.75 0.015 220);
+  --neutral-500: oklch(0.62 0.015 220);
+  --neutral-600: oklch(0.5 0.018 220);
+  --neutral-700: oklch(0.38 0.02 220);
+  --neutral-800: oklch(0.28 0.02 240);
+  --neutral-900: oklch(0.2 0.02 240);
+  --neutral-black: oklch(0.15 0.02 240);
+
+  /* TEXT COLORS - Readable, accessible hierarchy */
+  --text-primary: oklch(0.28 0.02 240); /* Main body text */
+  --text-secondary: oklch(0.45 0.018 240); /* Secondary text */
+  --text-muted: oklch(0.58 0.015 240); /* Subtle text */
+  --text-disabled: oklch(0.68 0.012 240); /* Disabled state */
+  --text-on-primary: oklch(0.99 0.002 220); /* White on colored backgrounds */
+
+  /* BACKGROUNDS & SURFACES */
+  --bg-base: oklch(0.98 0.005 220); /* Main background */
+  --bg-surface: oklch(0.99 0.002 220); /* Elevated surface (cards) */
+  --bg-elevated: oklch(1 0 0); /* Highest elevation */
+  --bg-overlay: oklch(0.96 0.008 220); /* Overlays, modals */
+  --bg-subtle: oklch(0.97 0.006 195); /* Subtle highlights */
+
+  /* STATUS COLORS - Strict Grayscale */
+  --status-success: oklch(0.65 0 0);
+  --status-success-bg: oklch(0.96 0 0);
+  --status-success-border: oklch(0.85 0 0);
+
+  --status-warning: oklch(0.7 0 0);
+  --status-warning-bg: oklch(0.96 0 0);
+  --status-warning-border: oklch(0.85 0 0);
+
+  --status-error: oklch(0.60 0 0);
+  --status-error-bg: oklch(0.96 0 0);
+  --status-error-border: oklch(0.85 0 0);
+
+  --status-info: oklch(0.6 0 0);
+  --status-info-bg: oklch(0.96 0 0);
+  --status-info-border: oklch(0.85 0 0);
+
+  /* INTERACTIVE ELEMENTS */
+  --interactive-hover: oklch(0.94 0.04 195);
+  --interactive-active: oklch(0.88 0.08 195);
+  --interactive-disabled: oklch(0.92 0.01 220);
+
+  /* BORDERS & DIVIDERS */
+  --border-light: oklch(0.92 0.008 220);
+  --border-medium: oklch(0.88 0.012 220);
+  --border-strong: oklch(0.8 0.015 220);
+  --border-accent: var(--primary-300);
+
+  /* SHADOWS (for depth perception) */
+  --shadow-sm: 0 1px 2px 0 oklch(0.2 0.02 240 / 0.05);
+  --shadow-md: 0 4px 6px -1px oklch(0.2 0.02 240 / 0.08);
+  --shadow-lg: 0 10px 15px -3px oklch(0.2 0.02 240 / 0.1);
+  --shadow-xl: 0 20px 25px -5px oklch(0.2 0.02 240 / 0.12);
+
+  /* GRADIENTS (subtle, optional) */
+  --gradient-primary: linear-gradient(
+    135deg,
+    var(--primary-400) 0%,
+    var(--primary-600) 100%
+  );
+  --gradient-calm: linear-gradient(
+    135deg,
+    var(--primary-50) 0%,
+    var(--secondary-50) 100%
+  );
+  --gradient-surface: linear-gradient(
+    180deg,
+    var(--bg-surface) 0%,
+    var(--bg-base) 100%
+  );
+
+  /* LEGACY TOKENS (for shadcn components compatibility) */
+  --background: var(--bg-base);
+  --foreground: var(--text-primary);
+  --card: var(--bg-surface);
+  --card-foreground: var(--text-primary);
+  --popover: var(--bg-elevated);
+  --popover-foreground: var(--text-primary);
+  --primary: var(--primary-500);
+  --primary-foreground: var(--text-on-primary);
+  --secondary: var(--neutral-100);
+  --secondary-foreground: var(--text-primary);
+  --muted: var(--neutral-100);
+  --muted-foreground: var(--text-muted);
+  --accent: var(--neutral-100);
+  --accent-foreground: var(--text-primary);
+  --destructive: var(--status-error);
+  --destructive-foreground: var(--text-on-primary);
+  --border: var(--border-medium);
+  --input: var(--border-medium);
+  --ring: var(--primary-400);
+  --radius: 0.75rem;
+
+  /* Chart colors (harmonious with brand) */
+  --chart-1: var(--chart-1);
+  --chart-2: var(--chart-2);
+  --chart-3: var(--chart-3);
+  --chart-4: var(--chart-4);
+  --chart-5: var(--chart-5);
+  --chart-1: var(--primary-500);
+  --chart-2: var(--secondary-500);
+  --chart-3: var(--status-info);
+  --chart-4: oklch(0.68 0.12 280);
+  --chart-5: oklch(0.72 0.14 60);
+  --sidebar: oklch(0.985 0 0);
+  --sidebar-foreground: oklch(0.145 0 0);
+  --sidebar-primary: oklch(0.205 0 0);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.97 0 0);
+  --sidebar-accent-foreground: oklch(0.205 0 0);
+  --sidebar-border: oklch(0.922 0 0);
+  --sidebar-ring: oklch(0.708 0 0);
+}
+
+.dark {
+  /* Dark mode color system - optional, follows same principles */
+
+  /* PRIMARY (slightly brighter in dark mode) */
+  --primary-500: oklch(0.62 0.14 195);
+  --primary-600: oklch(0.55 0.13 195);
+
+  /* NEUTRALS (inverted) */
+  --neutral-50: oklch(0.2 0.015 240);
+  --neutral-100: oklch(0.24 0.018 240);
+  --neutral-200: oklch(0.3 0.02 240);
+  --neutral-300: oklch(0.38 0.022 240);
+  --neutral-800: oklch(0.88 0.01 220);
+  --neutral-900: oklch(0.94 0.008 220);
+
+  /* TEXT (inverted) */
+  --text-primary: oklch(0.92 0.008 220);
+  --text-secondary: oklch(0.75 0.012 220);
+  --text-muted: oklch(0.6 0.015 220);
+  --text-on-primary: oklch(0.15 0.02 240);
+
+  /* BACKGROUNDS */
+  --bg-base: oklch(0.18 0.015 240);
+  --bg-surface: oklch(0.22 0.018 240);
+  --bg-elevated: oklch(0.26 0.02 240);
+  --bg-overlay: oklch(0.2 0.016 240);
+
+  /* STATUS (adjusted for dark mode) */
+  --status-success: oklch(0.7 0.15 145);
+  --status-success-bg: oklch(0.25 0.08 145);
+  --status-warning: oklch(0.75 0.16 75);
+  --status-warning-bg: oklch(0.25 0.08 75);
+  --status-error: oklch(0.68 0.18 25);
+  --status-error-bg: oklch(0.25 0.08 25);
+  --status-info: oklch(0.68 0.14 230);
+  --status-info-bg: oklch(0.25 0.08 230);
+
+  /* BORDERS */
+  --border-light: oklch(0.3 0.02 240);
+  --border-medium: oklch(0.35 0.022 240);
+  --border-strong: oklch(0.45 0.025 240);
+
+  /* LEGACY TOKENS */
+  --background: var(--bg-base);
+  --foreground: var(--text-primary);
+  --card: var(--bg-surface);
+  --border: var(--border-medium);
+  --ring: var(--primary-500);
+  --sidebar: oklch(0.205 0 0);
+  --sidebar-foreground: oklch(0.985 0 0);
+  --sidebar-primary: oklch(0.488 0.243 264.376);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.269 0 0);
+  --sidebar-accent-foreground: oklch(0.985 0 0);
+  --sidebar-border: oklch(0.269 0 0);
+  --sidebar-ring: oklch(0.439 0 0);
+}
+
+@theme inline {
+  /* Font configuration with Quicksand */
+  --font-sans: "Quicksand", "sans-serif";
+  --font-mono: "Geist Mono", "Geist Mono Fallback";
+
+  /* Exposing all color tokens to Tailwind */
+
+  /* Primary scale */
+  --color-primary-50: var(--primary-50);
+  --color-primary-100: var(--primary-100);
+  --color-primary-200: var(--primary-200);
+  --color-primary-300: var(--primary-300);
+  --color-primary-400: var(--primary-400);
+  --color-primary-500: var(--primary-500);
+  --color-primary-600: var(--primary-600);
+  --color-primary-700: var(--primary-700);
+  --color-primary-800: var(--primary-800);
+  --color-primary-900: var(--primary-900);
+
+  /* Secondary scale */
+  --color-secondary-50: var(--secondary-50);
+  --color-secondary-100: var(--secondary-100);
+  --color-secondary-200: var(--secondary-200);
+  --color-secondary-300: var(--secondary-300);
+  --color-secondary-400: var(--secondary-400);
+  --color-secondary-500: var(--secondary-500);
+  --color-secondary-600: var(--secondary-600);
+  --color-secondary-700: var(--secondary-700);
+  --color-secondary-800: var(--secondary-800);
+  --color-secondary-900: var(--secondary-900);
+
+  /* Neutral scale */
+  --color-neutral-white: var(--neutral-white);
+  --color-neutral-50: var(--neutral-50);
+  --color-neutral-100: var(--neutral-100);
+  --color-neutral-200: var(--neutral-200);
+  --color-neutral-300: var(--neutral-300);
+  --color-neutral-400: var(--neutral-400);
+  --color-neutral-500: var(--neutral-500);
+  --color-neutral-600: var(--neutral-600);
+  --color-neutral-700: var(--neutral-700);
+  --color-neutral-800: var(--neutral-800);
+  --color-neutral-900: var(--neutral-900);
+  --color-neutral-black: var(--neutral-black);
+
+  /* Text colors */
+  --color-text-primary: var(--text-primary);
+  --color-text-secondary: var(--text-secondary);
+  --color-text-muted: var(--text-muted);
+  --color-text-disabled: var(--text-disabled);
+  --color-text-on-primary: var(--text-on-primary);
+
+  /* Backgrounds */
+  --color-bg-base: var(--bg-base);
+  --color-bg-surface: var(--bg-surface);
+  --color-bg-elevated: var(--bg-elevated);
+  --color-bg-overlay: var(--bg-overlay);
+  --color-bg-subtle: var(--bg-subtle);
+
+  /* Status colors */
+  --color-status-success: var(--status-success);
+  --color-status-success-bg: var(--status-success-bg);
+  --color-status-success-border: var(--status-success-border);
+  --color-status-warning: var(--status-warning);
+  --color-status-warning-bg: var(--status-warning-bg);
+  --color-status-warning-border: var(--status-warning-border);
+  --color-status-error: var(--status-error);
+  --color-status-error-bg: var(--status-error-bg);
+  --color-status-error-border: var(--status-error-border);
+  --color-status-info: var(--status-info);
+  --color-status-info-bg: var(--status-info-bg);
+  --color-status-info-border: var(--status-info-border);
+
+  /* Interactive states */
+  --color-interactive-hover: var(--interactive-hover);
+  --color-interactive-active: var(--interactive-active);
+  --color-interactive-disabled: var(--interactive-disabled);
+
+  /* Borders */
+  --color-border-light: var(--border-light);
+  --color-border-medium: var(--border-medium);
+  --color-border-strong: var(--border-strong);
+  --color-border-accent: var(--border-accent);
+
+  /* Legacy tokens for shadcn components */
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+
+  /* Radius tokens */
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+
+  /* Healthcare Theme Mappings */
+  --color-healthcare-bg: var(--bg-base);
+  --color-healthcare-surface: var(--bg-surface);
+  --color-healthcare-accent: var(--primary-500);
+  --color-healthcare-accent-hover: var(--primary-600);
+  --color-healthcare-border: var(--border-medium);
+  --color-healthcare-text: var(--text-primary);
+  --color-healthcare-muted: var(--text-muted);
+  --color-healthcare-heading: var(--text-primary);
+  --color-healthcare-card: var(--bg-surface);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+  }
+  button,
+  [role="button"],
+  .cursor-pointer,
+  a,
+  select,
+  summary {
+    cursor: pointer !important;
+  }
+}
+
+/* Comprehensive responsive media queries for all device sizes */
+
+/* Small devices (landscape phones, 576px and up) */
+@media (min-width: 576px) {
+  .prose-healthcare h2 {
+    @apply text-2xl;
+  }
+  .prose-healthcare h3 {
+    @apply text-xl;
+  }
+}
+
+/* Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+  body {
+    font-size: 16px;
+  }
+  .prose-healthcare h2 {
+    @apply text-3xl;
+  }
+  .prose-healthcare h3 {
+    @apply text-2xl;
+  }
+}
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+  .prose-healthcare h2 {
+    @apply text-3xl;
+  }
+  .prose-healthcare h3 {
+    @apply text-2xl;
+  }
+}
+
+/* Extra large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {
+  .prose-healthcare {
+    font-size: 17px;
+  }
+}
+
+/* XXL devices (extra large desktops, 1400px and up) */
+@media (min-width: 1400px) {
+  .prose-healthcare {
+    font-size: 18px;
+  }
+}
+
+/* Mobile optimizations (max-width: 640px) */
+@media (max-width: 640px) {
+  body {
+    font-size: 14px;
+  }
+  .prose-healthcare h2 {
+    @apply text-xl mb-3 mt-6;
+  }
+  .prose-healthcare h3 {
+    @apply text-lg mb-2 mt-4;
+  }
+  .prose-healthcare p {
+    @apply mb-3;
+  }
+}
+
+/* Tablet optimizations (641px to 1024px) */
+@media (min-width: 641px) and (max-width: 1024px) {
+  body {
+    font-size: 15px;
+  }
+}
+
+/* Custom prose styles for report content with new color tokens */
+.prose-healthcare {
+  @apply text-text-primary;
+}
+
+.prose-healthcare h2 {
+  @apply text-2xl font-bold text-text-primary mb-4 mt-8;
+}
+
+.prose-healthcare h3 {
+  @apply text-xl font-semibold text-text-primary mb-3 mt-6;
+}
+
+.prose-healthcare p {
+  @apply mb-4 leading-relaxed text-text-primary;
+}
+
+.prose-healthcare ul {
+  @apply mb-4 space-y-2;
+}
+
+.prose-healthcare li {
+  @apply leading-relaxed text-text-primary;
+}
+
+.prose-healthcare strong {
+  @apply font-semibold text-text-primary;
+}

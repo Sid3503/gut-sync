@@ -1,0 +1,11 @@
+{
+  "antibiotics": ["diarrhea", "bloating", "nausea", "microbiome_disruption"],
+  "nsaids": ["gastritis", "ulcers", "bleeding", "abdominal_pain"],
+  "ibuprofen": ["gastritis", "ulcers", "bleeding", "abdominal_pain"],
+  "aspirin": ["gastritis", "ulcers", "bleeding", "abdominal_pain"],
+  "ppi": ["nutrient_malabsorption", "sibo", "infection_risk"],
+  "omeprazole": ["nutrient_malabsorption", "sibo", "infection_risk"],
+  "metformin": ["diarrhea", "nausea", "bloating", "abdominal_pain"],
+  "opioids": ["constipation", "bloating", "nausea"],
+  "ssri": ["nausea", "diarrhea", "constipation"]
+}

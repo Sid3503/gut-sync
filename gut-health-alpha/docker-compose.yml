@@ -1,0 +1,9 @@
+version: "3.8"
+services:
+  gut-agent:
+    build: .
+    volumes:
+      - .:/app
+    env_file:
+      - .env
+    command: python run_agent.py

@@ -1,0 +1,21 @@
+{
+  "bloated": "bloating",
+  "bloating": "bloating",
+  "gassy": "flatulence",
+  "gas": "flatulence",
+  "farting": "flatulence",
+  "cramps": "abdominal_cramping",
+  "cramping": "abdominal_cramping",
+  "pain": "abdominal_pain",
+  "stomach ache": "abdominal_pain",
+  "heartburn": "reflux",
+  "acid": "reflux",
+  "reflux": "reflux",
+  "diarrhea": "diarrhea",
+  "runs": "diarrhea",
+  "constipation": "constipation",
+  "blocked": "constipation",
+  "hard stool": "constipation",
+  "nausea": "nausea",
+  "sick": "nausea"
+}
