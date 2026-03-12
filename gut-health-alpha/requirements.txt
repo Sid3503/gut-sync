@@ -14,7 +14,7 @@ httpx>=0.24.0
 langgraph>=0.0.1
 langchain-core>=0.1.0
 langchain-openai>=0.0.2
-duckduckgo-search>=5.0.0
+ddgs>=0.1.0
 beautifulsoup4>=4.12.0
 
 
