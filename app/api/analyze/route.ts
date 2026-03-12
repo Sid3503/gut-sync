@@ -44,7 +44,8 @@ export async function POST(request: Request) {
 
     // Call the actual webhook endpoint
     // We send JSON to the agent, passing the file paths we just saved
-    const response = await fetch("http://127.0.0.1:8000/webhook/incoming", {
+    const backendUrl = process.env.NEXT_PUBLIC_API_URL || "http://127.0.0.1:8000"
+    const response = await fetch(`${backendUrl}/webhook/incoming`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
