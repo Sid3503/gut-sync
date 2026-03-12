@@ -1,7 +1,3 @@
-import { writeFile } from "fs/promises"
-import { join } from "path"
-import { tmpdir } from "os"
-
 export async function POST(request: Request) {
   try {
     const formData = await request.formData()
@@ -10,40 +6,33 @@ export async function POST(request: Request) {
     const source = formData.get("source") as string
     const file = formData.get("file") as File | null
 
-    let pdf_file_path = null
-    let image_file_paths: string[] = []
+    let pdf_content_b64: string | null = null
+    let pdf_filename: string | null = null
+    let image_contents_b64: Array<{ filename: string; content: string }> = []
 
-    // Handle PDF upload
+    // Handle PDF upload — encode as base64 to send across containers
     if (file) {
       const buffer = Buffer.from(await file.arrayBuffer())
-      const filename = `gutsync_upload_${Date.now()}_${file.name.replace(/[^a-zA-Z0-9.]/g, "")}`
-      const filepath = join(tmpdir(), filename)
-      
-      await writeFile(filepath, buffer)
-      pdf_file_path = filepath
-      console.log(`[API] Saved uploaded PDF to: ${filepath}`)
+      pdf_content_b64 = buffer.toString("base64")
+      pdf_filename = file.name.replace(/[^a-zA-Z0-9.]/g, "")
+      console.log(`[API] Encoded PDF for transfer: ${pdf_filename} (${buffer.length} bytes)`)
     }
 
-    // Handle multiple image uploads
+    // Handle multiple image uploads — encode each as base64
     const imageFiles = formData.getAll("image_files") as File[]
     if (imageFiles && imageFiles.length > 0) {
       console.log(`[API] Processing ${imageFiles.length} image files...`)
-      
       for (const imageFile of imageFiles) {
         if (imageFile && imageFile.size > 0) {
           const buffer = Buffer.from(await imageFile.arrayBuffer())
-          const filename = `gutsync_image_${Date.now()}_${Math.random().toString(36).substring(7)}_${imageFile.name.replace(/[^a-zA-Z0-9.]/g, "")}`
-          const filepath = join(tmpdir(), filename)
-          
-          await writeFile(filepath, buffer)
-          image_file_paths.push(filepath)
-          console.log(`[API] Saved image to: ${filepath}`)
+          const filename = imageFile.name.replace(/[^a-zA-Z0-9.]/g, "")
+          image_contents_b64.push({ filename, content: buffer.toString("base64") })
+          console.log(`[API] Encoded image: ${filename}`)
         }
       }
     }
 
-    // Call the actual webhook endpoint
-    // We send JSON to the agent, passing the file paths we just saved
+    // Send file content (base64) to backend — works across separate containers
     const backendUrl = process.env.NEXT_PUBLIC_API_URL || "http://127.0.0.1:8000"
     const response = await fetch(`${backendUrl}/webhook/incoming`, {
       method: "POST",
@@ -54,8 +43,9 @@ export async function POST(request: Request) {
         user_id,
         message,
         source,
-        pdf_file_path,
-        image_file_paths: image_file_paths.length > 0 ? image_file_paths : null
+        pdf_content_b64,
+        pdf_filename,
+        image_contents_b64: image_contents_b64.length > 0 ? image_contents_b64 : null,
       }),
     })
 
