@@ -1,6 +1,6 @@
 {
   "functions": {
-    "gut-health-alpha/api/index.py": {
+    "api/index.py": {
       "runtime": "@vercel/python@3.1.0",
       "maxDuration": 60
     }
@@ -8,7 +8,7 @@
   "routes": [
     {
       "src": "/api/(.*)",
-      "dest": "gut-health-alpha/api/index.py"
+      "dest": "api/index.py"
     }
   ]
 }
