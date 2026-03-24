@@ -32,9 +32,13 @@ export async function POST(request: Request) {
       }
     }
 
-    // Send file content (base64) to backend — works across separate containers
-    const backendUrl = process.env.NEXT_PUBLIC_API_URL || "http://127.0.0.1:8000"
-    const response = await fetch(`${backendUrl}/webhook/incoming`, {
+    // On Vercel: VERCEL_URL is auto-injected (no https://) — use it server-side.
+    // Locally: falls back to http://localhost:8000 for the standalone FastAPI server.
+    const vercelUrl = process.env.VERCEL_URL
+    const backendUrl = vercelUrl
+      ? `https://${vercelUrl}`
+      : process.env.NEXT_PUBLIC_API_URL || "http://127.0.0.1:8000"
+    const response = await fetch(`${backendUrl}/api/webhook/incoming`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
