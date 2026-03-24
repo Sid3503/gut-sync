@@ -289,7 +289,7 @@ export default function AnalyzePage() {
         <>
         <Navbar />
         <motion.div 
-          className="flex min-h-[calc(100vh-64px)] flex-col items-center justify-center bg-gradient-to-br from-healthcare-bg via-healthcare-surface to-healthcare-bg px-4"
+          className="flex min-h-screen flex-col items-center justify-center pt-24 pb-8 bg-gradient-to-br from-healthcare-bg via-healthcare-surface to-healthcare-bg px-4"
           initial={{ opacity: 0 }}
           animate={{ opacity: isTransitioning ? 0 : 1 }}
           transition={{ duration: 0.6 }}
@@ -375,7 +375,7 @@ export default function AnalyzePage() {
       <>
       <Navbar />
       <motion.div 
-        className="flex min-h-[calc(100vh-64px)] flex-col items-center justify-center bg-gradient-to-br from-healthcare-bg via-healthcare-surface to-healthcare-bg px-4"
+        className="flex min-h-screen flex-col items-center justify-center pt-24 pb-8 bg-gradient-to-br from-healthcare-bg via-healthcare-surface to-healthcare-bg px-4"
         animate={{ opacity: isTransitioning ? 0 : 1 }}
         transition={{ duration: 0.6 }}
       >

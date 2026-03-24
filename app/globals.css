@@ -211,8 +211,8 @@
 }
 
 @theme inline {
-  /* Font configuration with Quicksand */
-  --font-sans: "Quicksand", "sans-serif";
+  /* Font configuration with Space Grotesk */
+  --font-sans: "Space Grotesk", "Space Grotesk Fallback", sans-serif;
   --font-mono: "Geist Mono", "Geist Mono Fallback";
 
   /* Exposing all color tokens to Tailwind */

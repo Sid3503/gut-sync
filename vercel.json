@@ -1,0 +1,14 @@
+{
+  "functions": {
+    "gut-health-alpha/api/index.py": {
+      "runtime": "python3.11",
+      "maxDuration": 60
+    }
+  },
+  "routes": [
+    {
+      "src": "/api/(.*)",
+      "dest": "gut-health-alpha/api/index.py"
+    }
+  ]
+}
