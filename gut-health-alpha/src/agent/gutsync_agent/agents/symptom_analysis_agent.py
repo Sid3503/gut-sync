@@ -1,3 +1,4 @@
+import os
 import json
 from src.agent.gutsync_agent.service.llm_client import LLMClient
 from src.agent.gutsync_agent.tools.medication_lookup import MedicationLookup
@@ -16,7 +17,7 @@ class SymptomAnalysisAgent:
                 if effects:
                     med_effects[med] = effects
 
-        prompt_path = "src/agent/gutsync_agent/prompts/symptom_analysis.md"
+        prompt_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), "prompts", "symptom_analysis.md")
         with open(prompt_path, "r") as f:
             template = f.read()
 

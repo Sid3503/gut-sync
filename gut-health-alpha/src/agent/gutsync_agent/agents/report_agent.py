@@ -1,3 +1,4 @@
+import os
 from datetime import datetime
 import json
 import uuid
@@ -9,7 +10,7 @@ class ReportAgent:
         self.llm = LLMClient()
 
     def run(self, symptoms, root_causes, severity, relief_strategies, red_flags, user_input=None, **kwargs) -> dict:
-        prompt_path = "src/agent/gutsync_agent/prompts/report.md"
+        prompt_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), "prompts", "report.md")
         with open(prompt_path, "r") as f:
             template = f.read()
 

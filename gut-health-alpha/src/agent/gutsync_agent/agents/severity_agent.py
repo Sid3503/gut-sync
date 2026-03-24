@@ -1,3 +1,4 @@
+import os
 from src.agent.gutsync_agent.service.llm_client import LLMClient
 
 class SeverityAgent:
@@ -5,7 +6,7 @@ class SeverityAgent:
         self.llm = LLMClient()
 
     def run(self, symptoms: list, patterns: list) -> str:
-        prompt_path = "src/agent/gutsync_agent/prompts/severity.md"
+        prompt_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), "prompts", "severity.md")
         with open(prompt_path, "r") as f:
             template = f.read()
 

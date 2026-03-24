@@ -1,3 +1,4 @@
+import os
 import json
 from src.agent.gutsync_agent.service.llm_client import LLMClient
 
@@ -6,7 +7,7 @@ class RootCauseAgent:
         self.llm = LLMClient()
 
     def run(self, symptoms: list, timing: str, diet_changes: str, patterns: list, pdf_context: str = None) -> list:
-        prompt_path = "src/agent/gutsync_agent/prompts/root_cause.md"
+        prompt_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), "prompts", "root_cause.md")
         with open(prompt_path, "r") as f:
             template = f.read()
 

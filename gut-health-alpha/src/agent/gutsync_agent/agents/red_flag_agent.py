@@ -1,3 +1,4 @@
+import os
 import json
 from src.agent.gutsync_agent.service.llm_client import LLMClient
 from src.agent.gutsync_agent.tools.red_flag_rules import RedFlagRules
@@ -10,7 +11,7 @@ class RedFlagAgent:
     def run(self, user_input: str, symptoms: list) -> list:
         rules = self.rules_tool.get_rules()
         
-        prompt_path = "src/agent/gutsync_agent/prompts/red_flags.md"
+        prompt_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), "prompts", "red_flags.md")
         with open(prompt_path, "r") as f:
             template = f.read()
 
