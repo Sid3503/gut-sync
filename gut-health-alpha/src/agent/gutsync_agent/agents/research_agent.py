@@ -36,9 +36,16 @@ class ResearchAgent:
             search_results = [{
                 "title": "Nausea and Vomiting in Adults: A Comprehensive Review - NIH",
                 "href": "https://www.ncbi.nlm.nih.gov/books/NBK12345/",
-                "body": "Common causes of nausea and loose stools include viral gastroenteritis, medication side effects (especially antibiotics), and dietary intolerances. Antibiotic-associated diarrhea is a well-documented side effect."
+                "body": "Common causes of nausea and loose stools include viral gastroenteritis, medication side effects (especially antibiotics), and dietary intolerances. Antibiotic-associated diarrhea is a well-documented side effect.",
             }]
-        
+
+        # Build context from full_content (Crawl4AI) or body (DDG snippet)
+        context_parts = []
+        for r in search_results:
+            content = r.get("full_content") or r.get("body", "")
+            context_parts.append(f"**{r.get('title', '')}**\nSource: {r.get('href', '')}\n{content}")
+        context_str = "\n\n---\n\n".join(context_parts)
+
         # 2. Summarize with LLM
         prompt = f"""
         You are a medical research assistant. Analyze these search results from reliable sources (PubMed/NIH).
@@ -51,7 +58,7 @@ class ResearchAgent:
         - Max 3 findings.
 
         Search Results:
-        {search_results}
+        {context_str}
         """
         
         response = self.llm.generate_text(prompt)

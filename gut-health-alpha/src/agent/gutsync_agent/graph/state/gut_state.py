@@ -19,6 +19,10 @@ class GutSyncState(TypedDict):
     research_sources_nutrition: Optional[List[dict]]
     report: Optional[str]
     
+    # Language Support
+    detected_language: Optional[str]
+    original_user_input: Optional[str]
+    
     # PDF Upload State
     pdf_uploaded: bool
     pdf_file_path: Optional[str]

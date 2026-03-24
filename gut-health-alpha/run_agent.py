@@ -3,6 +3,7 @@ import asyncio
 from dotenv import load_dotenv
 from src.agent.gutsync_agent.graph.graph import create_gutsync_graph
 from src.agent.gutsync_agent.graph.state.gut_state import GutSyncState
+from src.agent.gutsync_agent.service.language_service import LanguageService
 
 # Load environment variables
 load_dotenv()
@@ -11,6 +12,7 @@ def main():
     print("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━")
     print("Gut Symptom Detective 🔍")
     print("Tagline: 'Tell me what's bothering you, I'll tell you why'")
+    print("Supports: English, Hindi, and Hinglish")
     print("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━")
     
     # Simple CLI Input
@@ -26,7 +28,7 @@ def main():
         )
         print(f"Input: {user_input}\n")
 
-    # Initialize State
+    # Initialize State with language fields
     initial_state = GutSyncState(
         user_input=user_input,
         symptoms=None,
@@ -38,7 +40,9 @@ def main():
         severity=None,
         relief_strategies=None,
         red_flags=None,
-        report=None
+        report=None,
+        detected_language=None,
+        original_user_input=None
     )
 
     # Create and Run Graph
@@ -67,6 +71,18 @@ def main():
         print("\n Done.\n")
         
         if final_state and "report" in final_state:
+             # Display language information if available
+             detected_language = final_state.get("detected_language")
+             original_input = final_state.get("original_user_input")
+             
+             if detected_language:
+                 language_service = LanguageService()
+                 language_name = language_service.get_language_name(detected_language)
+                 print(f"Language detected: {language_name}")
+                 if original_input and detected_language != "en":
+                     print(f"Original input: {original_input}")
+                 print()
+             
              # report might be in the partial update from report_node
              report_content = final_state["report"]
              print("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━")

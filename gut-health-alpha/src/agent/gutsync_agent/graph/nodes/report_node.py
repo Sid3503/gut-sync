@@ -1,6 +1,8 @@
 import json
 from src.agent.gutsync_agent.graph.state.gut_state import GutSyncState
 from src.agent.gutsync_agent.agents.report_agent import ReportAgent
+from src.agent.gutsync_agent.service.language_service import LanguageService
+from src.agent.gutsync_agent.service.llm_client import LLMClient
 
 def report_node(state: GutSyncState) -> GutSyncState:
     print(f"  [Node] Executing ReportNode...")
@@ -72,6 +74,28 @@ def report_node(state: GutSyncState) -> GutSyncState:
             
             final_markdown += f"{image_summary}\n\n"
             final_markdown += "> [!WARNING]\n> Visual observations should always be reviewed with a healthcare provider. These are descriptive findings, not diagnostic conclusions."
+        
+        # Handle language translation for the final report
+        detected_language = state.get("detected_language", "en")
+        original_user_input = state.get("original_user_input", "")
+        
+        # If the detected language is not English, translate the report back to the user's language
+        if detected_language != "en":
+            language_service = LanguageService()
+            llm_client = LLMClient()
+            
+            # Get language name for translation
+            target_language_name = language_service.get_language_name(detected_language)
+            print(f"  [Language] Translating report to {target_language_name}")
+            
+            # Translate the report using the LLM
+            translated_report = llm_client.translate_text(
+                final_markdown, 
+                target_language_name, 
+                "English"
+            )
+            
+            final_markdown = f"# [Translated Report] #\n\n{translated_report}"
         
         return {"report": final_markdown}
     except Exception as e:

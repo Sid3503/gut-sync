@@ -31,3 +31,32 @@ class LLMClient:
         except json.JSONDecodeError:
             # Fallback for simple list strings if format was close
             return {"raw_response": text, "error": "JSON parsing failed"}
+
+    def translate_text(self, text: str, target_language: str, source_language: str = "English") -> str:
+        """
+        Translate text using the LLM.
+        
+        Args:
+            text (str): Text to translate
+            target_language (str): Target language name
+            source_language (str): Source language name (default: English)
+            
+        Returns:
+            str: Translated text
+        """
+        # Skip translation if source and target are the same
+        if source_language.lower() == target_language.lower():
+            return text
+            
+        prompt = f"""
+        Translate the following text from {source_language} to {target_language}.
+        Maintain the original meaning and tone as closely as possible.
+        For medical or technical terms, provide the most accurate translation.
+        
+        Text to translate:
+        {text}
+        
+        Translation:
+        """.strip()
+        
+        return self.generate_text(prompt)
