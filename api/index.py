@@ -6,10 +6,24 @@ sys.path.append(
     os.path.join(os.path.dirname(__file__), "..", "gut-health-alpha")
 )
 
-# Import the FastAPI app
 from src.web.api import app
+from starlette.middleware.base import BaseHTTPMiddleware
+from starlette.requests import Request
 
-# Mount the app at /api so Vercel routes /api/* correctly to FastAPI
-# Vercel passes the full path (e.g. /api/webhook/incoming) to this function.
-# Setting root_path tells FastAPI it lives under /api, so /api/health → /health internally.
-app.root_path = "/api"
+
+class StripAPIPrefixMiddleware(BaseHTTPMiddleware):
+    """Strip /api prefix from paths so FastAPI routes match correctly on Vercel.
+
+    Vercel routes /api/* to this function with the full path intact.
+    FastAPI registers routes without /api prefix (e.g. /webhook/incoming),
+    so we strip /api before FastAPI sees the request.
+    """
+
+    async def dispatch(self, request: Request, call_next):
+        path: str = request.scope.get("path", "")
+        if path.startswith("/api"):
+            request.scope["path"] = path[4:] or "/"
+        return await call_next(request)
+
+
+app.add_middleware(StripAPIPrefixMiddleware)
