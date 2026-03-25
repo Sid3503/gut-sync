@@ -4,6 +4,10 @@
 
 The Gut Symptom Detective is an intelligent, multi-agent system designed to analyze digestive symptoms through natural language input and provide educational, evidence-based insights without offering medical diagnosis. This system processes user-reported symptoms to deliver a structured analysis that combines clinical reasoning, research insights, and personalized relief strategies.
 
+## Demo
+
+https://github.com/user-attachments/assets/166481b5-74dc-4546-bb1d-e310c32dd386
+
 ## Key Features
 
 ### Core Analysis Workflow
